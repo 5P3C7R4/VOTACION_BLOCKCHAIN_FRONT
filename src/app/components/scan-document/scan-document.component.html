@@ -1,0 +1,14 @@
+<div class="grid place-content-center w-screen h-screen" tabindex="0" id="focused">
+    <div class="flex w-[50%] border-solid border-2 border-gray-500 mx-auto flex-wrap">
+        <div class="mt-5 w-full text-center px-5">
+            <h3>ESCANEE SU CÉDULA DE CIUDADANÍA</h3>
+        </div>
+        <div class="flex flex-col mt-5 w-full justify-center px-5">
+            <p class="text-xl font-semibold text-center">Acerque el documento al lector cuando este se active.</p>
+            <img src="../../../assets/cc.png" alt="" class="my-4">
+        </div>
+    </div>
+    <div class="flex w-1/2 mx-auto mt-5">
+        <input class="caret-lime-600 w-full border-1 border-black" [(ngModel)]="document" (keypress)="handleKeyPress($event)"/>
+    </div>
+</div>

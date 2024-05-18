@@ -1,0 +1,50 @@
+<div class="mt-5 border-1 border-gray-500" style="max-width: 90%; margin: auto;">
+    <div class="flex my-5 w-full">
+        <h2 class="mx-auto">ELIJE TU CANDIDATO</h2>
+    </div>
+    <div class="grid grid-cols-4 mb-5">
+        @for(candidate of candidates; track candidate.id){
+        <div class="col mt-5" data-bs-toggle="modal" data-bs-target="#exampleModal"
+            (click)="preselectCandidate(candidate)">
+            @if (candidate) {
+            <div class="d-flex justify-content-center">
+                <img [src]="obtainImage(candidate.imageName)" class="w-44 h-44 rounded-full mx-auto object-cover"
+                    alt="Imagen del candidato">
+            </div>
+            }
+            <h2 class="fw-normal text-2xl text-center">{{candidate.name}}</h2>
+        </div>
+        }
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">CONFIRMACIÓN DE VOTO</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="grid grid-cols-3">
+                    @if(showModal) {
+                    <img [src]="obtainImage(preselectedCandidate.imageName)"
+                        class="w-24 h-24 col-span-1 rounded-full mx-auto object-cover" alt="Imagen del candidato">
+                    <div class="col-span-2">
+                        <h2>¿Está seguro de votar por {{preselectedCandidate.name}}?</h2>
+                    </div>
+                    }
+                </div>
+            </div>
+            <div class="modal-footer d-flex">
+                <div class="flex-grow-1">
+                    <button type="button" class="btn btn-secondary w-100" data-bs-dismiss="modal">Volver</button>
+                </div>
+                <div class="flex-grow-1">
+                    <button type="button" class="btn btn-primary w-100" data-bs-dismiss="modal"
+                        (click)="vote(preselectedCandidate)">Votar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
