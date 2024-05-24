@@ -3,13 +3,13 @@ import { Injectable, inject } from '@angular/core';
 import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from '@angular/fire/auth'
 import { Router } from '@angular/router';
 import { environment } from '../../environment/environment.prod';
+import Cookies from 'js-cookie';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  private _document!: string;
   private auth = inject(Auth)
   private router = inject(Router)
 
@@ -33,10 +33,10 @@ export class UserService {
   }
 
   get document() {
-    return this._document;
+    return Cookies.get("document") as string;
   }
 
   set document(document: string) {
-    this._document = document;
+    Cookies.set("document", document, { expires: 7 })
   }
 }

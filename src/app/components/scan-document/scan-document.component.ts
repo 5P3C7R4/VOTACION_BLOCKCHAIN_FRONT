@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from '../../services/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import Cookies from 'js-cookie';
 
 @Component({
   selector: 'app-scan-document',
@@ -39,6 +40,8 @@ export class ScanDocumentComponent {
           }
         })
       } catch (err) {
+        console.log("🚀 ~ ScanDocumentComponent ~ handleKeyPress ~ err:", err)
+        
         this.toastr.error("Documento no válido")
       }
     } else if (key.code == "Enter") {

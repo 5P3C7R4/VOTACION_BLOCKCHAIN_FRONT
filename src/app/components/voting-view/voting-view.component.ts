@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { firstValueFrom } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import Cookies from 'js-cookie';
 
 @Component({
   selector: 'app-voting-view',
@@ -47,8 +48,15 @@ export class VotingViewComponent implements OnInit {
         this.router.navigate(['scan']);
       },
       error: (err) => {
-        this.toastr.error("Ha ocurrido un error");
+        if (err.error) {
+          this.toastr.error(err.error);
+        } else {
+          this.toastr.error("Ha ocurrido un error");
+        }
         console.error(err)
+      },
+      complete: () => {
+        Cookies.remove("document")
       }
     });
   }
