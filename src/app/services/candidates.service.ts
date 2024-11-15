@@ -19,7 +19,7 @@ export class CandidatesService {
 
   getCandidates() {
     return this.http.get(this.url).pipe(
-      concatMap((el: any) => el),
+      concatMap((el: any) => el.dbCandidates),
       map((el: any) => { return { id: el._id, name: el.name, imageName: el.imageName } }),
       toArray()
     )

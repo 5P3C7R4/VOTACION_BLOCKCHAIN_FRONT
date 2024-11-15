@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { VotingViewComponent } from './components/voting-view/voting-view.component';
-import { canActivate, redirectUnauthorizedTo } from '@angular/fire/auth-guard'
 import { FingerprintAdminComponent } from './components/fingerprint-admin/fingerprint-admin.component';
 import { ScanDocumentComponent } from './components/scan-document/scan-document.component';
 

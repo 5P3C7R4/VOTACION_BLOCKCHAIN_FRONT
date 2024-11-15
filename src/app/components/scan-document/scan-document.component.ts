@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -23,8 +23,9 @@ export class ScanDocumentComponent {
     private userService: UserService
   ) { }
 
+  @HostListener("document:keydown", ['$event'])
   handleKeyPress(key: KeyboardEvent) {
-    if (key.code == "Enter" && this.document.length > 7) {
+    if (["Enter"].includes(key.code) && this.document.length > 7) {
       try {
         if (isNaN(parseInt(this.document)) || parseInt(this.document).toString().length != this.document.length) {
           throw new Error()
@@ -36,16 +37,15 @@ export class ScanDocumentComponent {
             toast.onHidden.subscribe({ next: () => setTimeout(() => this.navigate(), 500) })
           },
           error: (err: HttpErrorResponse) => {
-            this.toastr.error(err.error)
+            console.log("🚀 ~ ScanDocumentComponent ~ this.userService.verifyDocument ~ err:", err)
+            this.toastr.error(err.error.res)
           }
         })
       } catch (err) {
-        console.log("🚀 ~ ScanDocumentComponent ~ handleKeyPress ~ err:", err)
-        
         this.toastr.error("Documento no válido")
       }
-    } else if (key.code == "Enter") {
-      this.toastr.error("Documento no válido")
+    } else if (["Enter"].includes(key.code)) {
+      this.toastr.error("Ingrese un documento válido")
     }
   }
 
